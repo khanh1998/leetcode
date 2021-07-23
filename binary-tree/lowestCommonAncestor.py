@@ -24,13 +24,13 @@ class Solution:
         if current.right:
             self.findNode(current.right, p_value, q_value)
         self.tmp_path.pop()
-
+        
     def findCommonNode(self) -> 'TreeNode':
         for p in reversed(self.p_path):
             for q in reversed(self.q_path):
-                if p == q:
+                if p.val == q.val:
                     return q
-
+        
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         self.findNode(root, p.val, q.val)
         common = self.findCommonNode()

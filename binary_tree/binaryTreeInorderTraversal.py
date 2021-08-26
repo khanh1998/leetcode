@@ -1,6 +1,7 @@
 from enum import Enum
 from queue import Queue
 import time
+from typing import List
 # Definition for a binary tree node.
 class Direct(Enum):
     left = 1
@@ -18,7 +19,7 @@ class TreeNode:
 
 # In-order traversal is to traverse the left subtree first. Then visit the root. Finally, traverse the right subtree.
 class Solution:
-    def inorderTraversal(self, root: TreeNode) -> [int]:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
         if root == None:
             return []
         stack = []
@@ -63,7 +64,7 @@ class Solution:
             print(len(stack))
         return traversal
 
-def createTree(inputValues: [int]) -> TreeNode:
+def createTree(inputValues: List[int]) -> TreeNode:
     queue = Queue()
     root = TreeNode(inputValues[0]) 
     queue.put(root)

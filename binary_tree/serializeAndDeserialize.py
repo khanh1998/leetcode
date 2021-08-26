@@ -1,4 +1,5 @@
 from queue import Queue
+from typing import List
 
 # Definition for a binary tree node.
 class TreeNode(object):
@@ -10,7 +11,7 @@ class TreeNode(object):
 
 class Codec:
 
-  def serialize(self, root):
+  def serialize(self, root: TreeNode) -> List[int]:
     """Encodes a tree to a single string.
 
     :type root: TreeNode
@@ -40,7 +41,7 @@ class Codec:
       first_queue = second_queue
     return values
 
-  def deserialize(self, data):
+  def deserialize(self, data: List[int]) -> TreeNode:
     """Decodes your encoded data to tree.
 
     :type data: str
@@ -54,12 +55,16 @@ class Codec:
     queue.put(root)
     while len(values) > 0:
       currNode = queue.get()
-      left, right, *rest = values[:2]
-      if left:
+      if len(values) > 1:
+        left, right, *rest = values
+      else:
+        left, *rest = values
+      
+      if left != None:
         left_node = TreeNode(left)
         queue.put(left_node)
         currNode.left = left_node
-      if right:
+      if right != None:
         right_node = TreeNode(right)
         queue.put(right_node)
         currNode.right = right_node

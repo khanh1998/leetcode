@@ -29,9 +29,14 @@ class Solution:
             wholeTree = (*left, root.val, *right)
         elif left:
             # only left subtree
+            # -1 represent for the node that only have left children
             wholeTree = (*left, -1, root.val,)
+            # because sometimes, inorder traverse result of a subtree that only have left child
+            # and a subtree that only have right child are the same.
+            # that is why I need -1 and -2 to differentiate these cases.
         elif right:
             # only right subtree
+            # -2 repersent for the node that only have right children
             wholeTree = (root.val, -2, *right)
         else:
             # no right subtree and no left subtree

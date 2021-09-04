@@ -13,7 +13,7 @@ class Solution:
             charIndex = rowIndex + partIndex * (numRow + (numRow - 2)); charIndex < len(s)
             charIndex = (partIndex + 1) * (numRow + (numRow - 2)) - rowIndex ; charIndex < len(s)
     '''
-    def convert(self, s: str, numRows: int) -> str:
+    def convertMethod1(self, s: str, numRows: int) -> str:
         zigzac = ''
         if numRows == 1:
             return s
@@ -35,7 +35,23 @@ class Solution:
                 partIndex += 1
         return zigzac
 
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1:
+            return s
+        zigzac = ['' for _ in range(numRows)]
+        goingDown = False
+        currRow = 0
+        for char in s:
+            zigzac[currRow] += char
+            if currRow == 0 or currRow == numRows - 1:
+                goingDown = not goingDown
+            currRow += 1 if goingDown else -1
+        result = ''.join(zigzac)
+        return result
+
 s = Solution()
 print(s.convert('PAYPALISHIRING', 4) == 'PINALSIGYAHRPI')
 print(s.convert('PAYPALISHIRING', 3) == 'PAHNAPLSIIGYIR')
+print(s.convert('PAYPALISHIRING', 2) == 'PAHNAPLSIIGYIR')
 print(s.convert('A', 1) == 'A')
+print(s.convert('AB', 2) == 'AB')

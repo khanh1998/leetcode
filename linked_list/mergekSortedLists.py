@@ -106,7 +106,7 @@ class Solution:
     def mergeKListsRecur(self, lists: List[Optional[ListNode]], start: int, end: int) -> Optional[ListNode]:
         diff = end - start
         if diff >= 2:
-            middle = diff // 2
+            middle = start + (diff // 2)
             left = self.mergeKListsRecur(lists, start, middle)
             right = self.mergeKListsRecur(lists, middle + 1, end)
             return self.mergeTwoLists(left, right)

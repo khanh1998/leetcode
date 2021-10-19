@@ -60,8 +60,8 @@ def printList(head: ListNode) -> str:
     string = ', '.join(values)
     print(string)
     return string
-myList = createList([1,2,3,4,5])
-printList(myList)
-solution = Solution()
-rotated = solution.rotateRight(myList, 2)
-printList(rotated)
+# myList = createList([1,2,3,4,5])
+# printList(myList)
+# solution = Solution()
+# rotated = solution.rotateRight(myList, 2)
+# printList(rotated)

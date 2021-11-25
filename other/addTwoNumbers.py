@@ -3,6 +3,41 @@ class ListNode:
         self.val = val
         self.next = next
 
+class ShorterSolution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        ptr1, ptr2 = l1, l2
+        head, tail = None, None
+        carry = 0
+        # 5 4 3 2 1
+        #           |
+        # 9 8 7
+        #       |
+        # 4 3 1 3 1
+        # \       /
+        # val1 = 1, val2 = 0
+        # sum = 1, carry = 0, digit=1
+        while ptr1 != None or ptr2 != None or carry != 0:
+            val1, val2 = 0, 0
+            if ptr1 != None:
+                val1 = ptr1.val
+                ptr1 = ptr1.next
+            if ptr2 != None:
+                val2 = ptr2.val
+                ptr2 = ptr2.next
+            digitsSum = val1 + val2 + carry
+            carry = digitsSum // 10
+            digit = digitsSum % 10
+            newNode = ListNode(val=digit)
+            if head == None and tail == None:
+                head = newNode
+                tail = newNode
+            else:
+                tail.next = newNode
+                tail = newNode
+        return head
+
+
+
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         resultHead = None

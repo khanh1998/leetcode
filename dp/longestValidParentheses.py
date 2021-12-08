@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/longest-valid-parentheses/solution/
 class Solution:
-    def longestValidParentheses(self, s: str) -> int:
+    def longestValidParenthesesDP(self, s: str) -> int:
         length = len(s)
         if length == 0:
             return 0
@@ -22,8 +22,22 @@ class Solution:
         print(dp)
         return maxLength
 
+    def longestValidParentheses(self, s: str) -> int:
+        print('------------------------')
+        stack, res, s = [0], 0, ')'+s
+        print(s)
+        for i in range(1, len(s)):
+            print(i, stack, s[stack[-1]], s[i])
+            if s[i] == ')' and s[stack[-1]] == '(':
+                stack.pop()
+                res = max(res, i - stack[-1])
+            else:
+                stack.append(i)
+        return res
+
 s = Solution()
-print(s.longestValidParentheses('((()') == 2)
+print(s.longestValidParentheses('())') == 2)
+#print(s.longestValidParentheses('((()') == 2)
 print(s.longestValidParentheses(')()())') == 4)
 print(s.longestValidParentheses('()(()))))') == 6)
 print(s.longestValidParentheses('(()') == 2)

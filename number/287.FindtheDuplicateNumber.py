@@ -3,6 +3,22 @@ from typing import List
 
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
+        # Floyd cycle detection
+        slow, fast = nums[0], nums[0]
+        firstStep = True
+        while slow != fast or firstStep:
+            slow = nums[slow] # move forward one step
+            fast = nums[nums[fast]] # move forward two steps
+            firstStep = False
+        meet = slow
+        first, second = nums[0], meet
+        while first != second:
+            first = nums[first]
+            second = nums[second]
+        duplication = first
+        return duplication
+
+    def findDuplicate3(self, nums: List[int]) -> int:
         BIT_LENGTH = 17
         baseCount = [0] * BIT_LENGTH # 2^17 > 10^5
         numsCount = [0] * BIT_LENGTH # 2^17 > 10^5

@@ -1,6 +1,5 @@
 from typing import List
 
-
 class Solution:
     def __init__(self) -> None:
         self.dict = {}
@@ -8,7 +7,27 @@ class Solution:
             key = f'{i}'
             self.dict[key] = True
 
+    def numDecodings(self, s: str) -> int:
+        counts = [0] * len(s)
+        counts[0] = 1
+        if s[0] == '0':
+            counts[0] = 0
+        for i in range(1, len(s)):
+            c = 0
+            key = f'{s[i]}'
+            if key in self.dict:
+                c += counts[i-1]
+            key = f'{s[i-1:i+1]}'
+            if key in self.dict:
+                if i - 2 >= 0:
+                    c += counts[i-2]
+                else:
+                    c += 1
+            counts[i] = c
+        return counts[-1]
+
     def count(self, s: str, i: int, arr: List[str]) -> int:
+        # time limit exceeded
         if i >= len(s):
             return 1
         c = 0
@@ -28,11 +47,11 @@ class Solution:
 
         return c
 
-    def numDecodings(self, s: str) -> int:
+    def numDecodings1(self, s: str) -> int:
         return self.count(s, 0, [])
 
 s = Solution()
+print(s.numDecodings('06') == 0)
 print(s.numDecodings('11106') == 2)
 print(s.numDecodings('12') == 2)
 print(s.numDecodings('226') == 3)
-print(s.numDecodings('06') == 0)

@@ -2,7 +2,24 @@ from typing import List
 
 
 class Solution:
+    def find(self, s: str, wordDict: List[str], start: int) -> bool:
+        lengthS = len(s)
+        if start >= lengthS:
+            return True
+        for word in wordDict:
+            lengthW = len(word)
+            if lengthS - start < lengthW:
+                continue
+            if word == s[start:start + lengthW]:
+                ok = self.find(s, wordDict, start + lengthW)
+                if ok == True:
+                    return True
+        return False
+
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        return self.find(s, wordDict, 0)
+
+    def wordBreak1(self, s: str, wordDict: List[str]) -> bool:
         lengthS = len(s)
         dp = [False] * (len(s) + 1)
         dp[-1] = True

@@ -2,6 +2,16 @@ from typing import List
 
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
+        result = nums[0]
+        imax, imin = nums[0], nums[0]
+        for num in nums[1:]:
+            candidates = [num, imax * num, imin * num]
+            imax = max(candidates)
+            imin = min(candidates)
+            result = max(result, imax)
+        return result
+
+    def maxProduct1(self, nums: List[int]) -> int:
         # two passes solution
         maxValue = -11
         cumulative = 1
